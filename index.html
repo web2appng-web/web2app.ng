@@ -73,7 +73,6 @@
   img { max-width: 100%; display: block; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-  /* ============ WOBBLE ============ */
   @keyframes wobble {
     0% { transform: rotate(0deg); }
     15% { transform: rotate(-2deg); }
@@ -108,7 +107,6 @@
   }
   .reveal.in { opacity: 1; transform: translateY(0); }
 
-  /* ============ FLOATING FORM BAR ============ */
   .floating-bar {
     position: fixed;
     top: 84px;
@@ -181,7 +179,6 @@
     animation: wobble 0.5s ease-in-out;
   }
 
-  /* ============ PREMIUM NAV ============ */
   .nav {
     position: sticky; top: 0; z-index: 150;
     padding: 18px 0 16px;
@@ -190,9 +187,7 @@
     background: rgba(5,6,10,0.72);
     border-bottom: 1px solid transparent;
     transition: border-color 0.3s, background 0.3s, padding 0.3s;
-    position: relative;
   }
-  /* Glass sheen at the top */
   .nav::before {
     content: '';
     position: absolute;
@@ -213,7 +208,6 @@
     gap: 32px;
   }
 
-  /* Refined logo */
   .logo {
     display: flex; align-items: center; gap: 12px;
     font-family: 'DM Sans', sans-serif;
@@ -237,14 +231,9 @@
     animation: wobble 0.5s ease-in-out;
     transform: scale(1.05);
   }
-  .logo-text {
-    display: flex;
-    align-items: baseline;
-    gap: 0;
-  }
+  .logo-text { display: flex; align-items: baseline; gap: 0; }
   .logo .ng { color: var(--brand); font-weight: 600; }
 
-  /* Premium nav links */
   .nav-links {
     display: flex;
     align-items: center;
@@ -253,12 +242,11 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 500;
     color: var(--text-dim);
-    position: relative;
   }
   .nav-links a {
     position: relative;
     padding: 8px 14px;
-    transition: color 0.25s;
+    transition: color 0.25s, font-weight 0.25s;
     border-radius: 8px;
     letter-spacing: -0.005em;
     display: inline-flex;
@@ -274,7 +262,7 @@
     height: 1.5px;
     background: linear-gradient(90deg, var(--brand), var(--brand-2));
     border-radius: 2px;
-    transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), left 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
     transform: translateX(-50%);
   }
   .nav-links a:hover {
@@ -282,12 +270,9 @@
     font-weight: 600;
     background: rgba(255,255,255,0.03);
   }
-  .nav-links a:hover::after {
-    width: calc(100% - 28px);
-  }
+  .nav-links a:hover::after { width: calc(100% - 28px); }
   .nav-links a:hover { animation: wobble 0.5s ease-in-out; }
 
-  /* Divider between nav clusters */
   .nav-divider {
     width: 1px;
     height: 20px;
@@ -296,11 +281,7 @@
     opacity: 0.8;
   }
 
-  .nav-cta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
   .nav-cta .btn-primary {
     font-family: 'DM Sans', sans-serif;
     font-weight: 600;
@@ -349,7 +330,6 @@
   .menu-toggle.open span:nth-child(2) { opacity: 0; }
   .menu-toggle.open span:nth-child(3) { top: 20px; transform: translateX(-50%) rotate(-45deg); }
 
-  /* ============ MOBILE MENU ============ */
   .mobile-menu {
     position: fixed;
     top: 0; right: 0;
@@ -427,7 +407,6 @@
   }
   .mobile-menu-footer .contact a { color: var(--brand); }
 
-  /* ============ BUTTONS ============ */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 12px 22px; border-radius: 12px;
@@ -455,7 +434,6 @@
     animation: wobble-scale 0.5s ease-in-out;
   }
 
-  /* ============ HERO ============ */
   .hero { padding: 72px 0 80px; position: relative; overflow: hidden; }
   .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
 
@@ -546,7 +524,6 @@
     width: 76px; height: 22px; background: #000; border-radius: 12px; z-index: 20;
   }
 
-  /* Hero app e-commerce */
   .hero-app {
     position: absolute;
     inset: 0;
@@ -770,7 +747,6 @@
   .notif-text strong { display: block; color: var(--text); font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; }
   .notif-text span { color: var(--text-dimmer); font-size: 11px; }
 
-  /* ============ TRUST ============ */
   .trust { padding: 36px 0 72px; text-align: center; }
   .trust-statement {
     font-size: clamp(16px, 2vw, 20px);
@@ -812,7 +788,6 @@
     font-family: 'DM Sans', sans-serif;
   }
 
-  /* ============ TRANSFORMATION ============ */
   .transform-section {
     position: relative;
     padding: 20px 0;
@@ -1418,7 +1393,6 @@
     .app-splash { display: none; }
   }
 
-  /* ============ SECTIONS ============ */
   section { padding: 72px 0; position: relative; }
   .section-tag {
     display: inline-block; padding: 6px 14px; border-radius: 999px;
@@ -1436,7 +1410,6 @@
   .center { text-align: center; }
   .center .section-sub { margin-left: auto; margin-right: auto; }
 
-  /* ============ PLATFORMS ============ */
   .platforms { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 36px; }
   .platform-card {
     background: var(--glass); border: 1px solid var(--border);
@@ -2026,7 +1999,6 @@
     .hero-sub { margin-left: auto; margin-right: auto; }
     .hero-form { margin: 0 auto; }
     .hero-meta { justify-content: center; }
-    .phone-wrap { display: none; }
     .platforms { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; }
     .features-grid { grid-template-columns: 1fr 1fr; }
@@ -2065,12 +2037,12 @@
     .step { padding: 26px 22px; }
     .price-card { padding: 30px 24px; }
     .price-amount { font-size: 34px; }
+    .phone-wrap { display: none; }
   }
 
   @media (max-width: 380px) {
     .hero h1 { font-size: 30px; }
     .section-title { font-size: 24px; }
-    .phone { width: 230px; height: 470px; }
     .logo { font-size: 16px; gap: 8px; }
     .logo-mark { width: 30px; height: 30px; font-size: 11px; }
   }
@@ -2156,7 +2128,7 @@
   </nav>
   <div class="mobile-menu-footer">
     <button class="btn btn-primary" data-open-order>Get Started →</button>
-    <a href="https://wa.me/2348089189888" class="btn btn-ghost" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    <a href="https://wa.me/2348012345678" class="btn btn-ghost" target="_blank" rel="noopener">Chat on WhatsApp</a>
     <p class="contact">Or email <a href="mailto:app@web2app.ng">app@web2app.ng</a></p>
   </div>
 </aside>
@@ -3883,23 +3855,24 @@
     labelEnd.classList.add('active');
   }
 
+  // ============ DISCOURAGE CASUAL INSPECTION ============
+  document.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (
+      event.key === 'F12' ||
+      (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J' || event.key === 'C')) ||
+      (event.ctrlKey && event.key === 'U')
+    ) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
   console.log('%cweb2app.ng', 'font-size:24px; font-weight:800; color:#00d97e;');
   console.log('%cA product of Worksmail Comms LTD', 'font-size:12px; color:#9ba3b4;');
 </script>
- // Discourage casual inspection
-document.addEventListener('contextmenu', (event) => {
-  event.preventDefault();
-});
-
-document.addEventListener('keydown', (event) => {
-  if (
-    event.key === 'F12' ||
-    (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J' || event.key === 'C')) ||
-    (event.ctrlKey && event.key === 'U')
-  ) {
-    event.preventDefault();
-    return false;
-  }
-});
 </body>
 </html>
