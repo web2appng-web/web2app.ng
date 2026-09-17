@@ -3886,5 +3886,20 @@
   console.log('%cweb2app.ng', 'font-size:24px; font-weight:800; color:#00d97e;');
   console.log('%cA product of Worksmail Comms LTD', 'font-size:12px; color:#9ba3b4;');
 </script>
+ // Discourage casual inspection
+document.addEventListener('contextmenu', (event) => {
+  event.preventDefault();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (
+    event.key === 'F12' ||
+    (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J' || event.key === 'C')) ||
+    (event.ctrlKey && event.key === 'U')
+  ) {
+    event.preventDefault();
+    return false;
+  }
+});
 </body>
 </html>
