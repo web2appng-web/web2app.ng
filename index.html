@@ -29,6 +29,9 @@
     --radius: 20px;
     --radius-lg: 28px;
     --max: 1200px;
+    --fly-primary: #0a1f44;
+    --fly-accent: #e8b923;
+    --fly-accent-soft: rgba(232,185,35,0.15);
   }
 
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -544,7 +547,7 @@
   /* ============ TRANSFORMATION SECTION ============ */
   .transform-section {
     position: relative;
-    height: 300vh;
+    height: 400vh;
     padding: 0;
   }
   .transform-sticky {
@@ -557,11 +560,11 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 40px 20px;
+    padding: 30px 20px;
   }
   .transform-label {
     position: absolute;
-    top: 10%;
+    top: 6%;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Space Grotesk', sans-serif;
@@ -571,9 +574,10 @@
     text-transform: uppercase;
     color: var(--text-dimmer);
     opacity: 0;
-    transition: opacity 0.6s;
+    transition: opacity 0.5s;
     text-align: center;
     width: 100%;
+    padding: 0 20px;
   }
   .transform-label.active { opacity: 1; }
   .transform-label .label-accent { color: var(--brand); }
@@ -581,8 +585,8 @@
   .transform-stage {
     position: relative;
     width: 100%;
-    max-width: 900px;
-    height: 480px;
+    max-width: 1100px;
+    height: 620px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -592,182 +596,766 @@
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(0,217,126,0.25), transparent 65%);
-    filter: blur(70px);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(0,217,126,0.22), transparent 65%);
+    filter: blur(80px);
     opacity: 0;
     transition: opacity 0.8s;
     pointer-events: none;
   }
   .transform-halo.active { opacity: 1; }
 
-  /* Browser mockup */
+  /* --- Browser mockup showing FlyEmpty --- */
   .transform-browser {
     position: absolute;
     top: 50%; left: 50%;
-    width: 480px;
-    height: 340px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, #0e1119, #080a12);
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.9);
+    width: 720px;
+    height: 480px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 40px 100px -30px rgba(0,0,0,0.9);
     overflow: hidden;
     transform-origin: center center;
-    will-change: transform, border-radius;
+    will-change: transform, border-radius, opacity;
+    color: #0a1f44;
+    font-family: 'Inter', sans-serif;
   }
-  .browser-top {
-    height: 32px;
+  .browser-chrome {
+    height: 34px;
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 0 14px;
-    background: rgba(255,255,255,0.03);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: #f1f3f7;
+    border-bottom: 1px solid #e2e6ee;
   }
   .browser-dot {
-    width: 10px; height: 10px;
+    width: 11px; height: 11px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.15);
+    background: #d0d5e0;
   }
   .browser-dot.red { background: #ff5f57; }
   .browser-dot.yellow { background: #ffbd2e; }
   .browser-dot.green { background: #28c940; }
   .browser-url {
     flex: 1;
-    margin-left: 8px;
-    height: 16px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 4px;
-    max-width: 260px;
-  }
-  .browser-content {
-    padding: 22px 26px;
-    height: calc(100% - 32px);
+    margin-left: 10px;
+    height: 22px;
+    background: #ffffff;
+    border: 1px solid #e2e6ee;
+    border-radius: 6px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 500;
   }
-  .browser-hero {
-    height: 62px;
-    border-radius: 8px;
-    background: linear-gradient(90deg, rgba(0,217,126,0.18), rgba(0,180,216,0.1));
-    border: 1px solid rgba(0,217,126,0.2);
+  .browser-url::before {
+    content: '🔒  ';
+    font-size: 10px;
+    margin-right: 4px;
+    opacity: 0.6;
   }
-  .browser-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    flex: 1;
-  }
-  .browser-block {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
-  }
-  .browser-lines {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 10px;
-  }
-  .browser-line {
-    height: 5px;
-    background: rgba(255,255,255,0.07);
-    border-radius: 3px;
-  }
-  .browser-line.w60 { width: 60%; }
-  .browser-line.w40 { width: 40%; }
-  .browser-line.w80 { width: 80%; }
 
-  /* App icon */
+  /* FlyEmpty site content inside browser */
+  .fly-site {
+    background: #ffffff;
+    height: calc(100% - 34px);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .fly-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 26px;
+    border-bottom: 1px solid #eef1f6;
+    background: #ffffff;
+  }
+  .fly-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    font-size: 16px;
+    color: #0a1f44;
+    letter-spacing: -0.02em;
+  }
+  .fly-logo-mark {
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #0a1f44, #1a3a6b);
+    display: grid; place-items: center;
+    color: #e8b923;
+    font-size: 13px;
+    font-weight: 900;
+    position: relative;
+  }
+  .fly-logo-mark::after {
+    content: '✈';
+    position: absolute;
+    font-size: 12px;
+    transform: rotate(-30deg);
+  }
+  .fly-logo .ng { color: #6b7280; font-weight: 500; font-size: 13px; margin-left: 2px; }
+  .fly-nav-links {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: #4b5563;
+    font-weight: 500;
+  }
+  .fly-nav-links span { padding: 4px 0; }
+  .fly-nav-signin {
+    padding: 6px 14px;
+    border: 1px solid #0a1f44;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #0a1f44;
+  }
+  .fly-hero {
+    padding: 22px 26px 18px;
+    background: linear-gradient(180deg, #f8f9fc, #ffffff);
+    flex-shrink: 0;
+  }
+  .fly-hero h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0a1f44;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .fly-hero h1 .gold { color: #e8b923; }
+  .fly-hero p {
+    font-size: 12px;
+    color: #4b5563;
+    line-height: 1.5;
+    max-width: 480px;
+    margin-bottom: 12px;
+  }
+  .fly-search {
+    display: flex;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e6ee;
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 2px 10px rgba(10,31,68,0.04);
+    align-items: center;
+  }
+  .fly-search-field {
+    flex: 1;
+    padding: 6px 10px;
+    border-right: 1px solid #eef1f6;
+    min-width: 0;
+  }
+  .fly-search-field:last-of-type { border-right: none; }
+  .fly-search-field .lab {
+    font-size: 9px;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+  .fly-search-field .val {
+    font-size: 11px;
+    color: #0a1f44;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fly-search-btn {
+    padding: 8px 18px;
+    background: #0a1f44;
+    color: #ffffff;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .fly-badges {
+    display: flex;
+    gap: 14px;
+    font-size: 10px;
+    color: #6b7280;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .fly-badges span::before {
+    content: '✓ ';
+    color: #16a34a;
+    font-weight: 700;
+  }
+  .fly-deals {
+    padding: 12px 26px 16px;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+  .fly-deals-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .fly-deals-head h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0a1f44;
+    letter-spacing: -0.01em;
+  }
+  .fly-deals-head .view {
+    font-size: 11px;
+    color: #e8b923;
+    font-weight: 600;
+  }
+  .fly-deal-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border: 1px solid #eef1f6;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    background: #fbfcfe;
+  }
+  .fly-route {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    color: #0a1f44;
+  }
+  .fly-route .arrow {
+    color: #e8b923;
+    font-weight: 900;
+  }
+  .fly-deal-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+  .fly-deal-meta .plane {
+    font-size: 10.5px;
+    color: #4b5563;
+    font-weight: 600;
+  }
+  .fly-deal-meta .sub {
+    font-size: 9px;
+    color: #6b7280;
+  }
+  .fly-deal-meta .verified {
+    font-size: 9px;
+    color: #16a34a;
+    font-weight: 600;
+  }
+  .fly-deal-meta .verified::before { content: '● '; }
+  .fly-price {
+    text-align: right;
+  }
+  .fly-price .amt {
+    font-size: 13px;
+    font-weight: 800;
+    color: #0a1f44;
+    letter-spacing: -0.02em;
+  }
+  .fly-price .per {
+    font-size: 9px;
+    color: #6b7280;
+  }
+
+  /* --- App icon (morph target) --- */
   .transform-icon {
     position: absolute;
     top: 50%; left: 50%;
-    width: 140px; height: 140px;
-    border-radius: 32px;
-    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    width: 160px; height: 160px;
+    border-radius: 36px;
+    background: linear-gradient(135deg, #0a1f44, #1a3a6b);
     display: grid; place-items: center;
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 900;
-    font-size: 42px;
-    color: #001a0e;
+    font-size: 44px;
+    color: #e8b923;
     letter-spacing: -0.04em;
     opacity: 0;
-    box-shadow: 0 20px 60px rgba(0,217,126,0.5), inset 0 0 30px rgba(255,255,255,0.15);
+    box-shadow: 0 30px 80px rgba(10,31,68,0.6), inset 0 0 40px rgba(232,185,35,0.15);
     transform-origin: center center;
     will-change: transform, opacity;
-  }
-
-  /* Phone in final phase */
-  .transform-phone {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 240px;
-    height: 480px;
-    border-radius: 38px;
-    background: linear-gradient(160deg, #12141d, #080a10);
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9), inset 0 0 40px rgba(0,217,126,0.05);
-    padding: 10px;
-    opacity: 0;
-    transform-origin: center center;
-    will-change: transform, opacity;
-  }
-  .transform-phone-screen {
-    width: 100%; height: 100%;
-    border-radius: 30px;
-    background: linear-gradient(170deg, #0d1018, #05060a);
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.05);
     position: relative;
   }
-  .transform-phone-notch {
-    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-    width: 68px; height: 20px; background: #000; border-radius: 11px;
-  }
-  .phone-home-grid {
+  .transform-icon::after {
+    content: '✈';
     position: absolute;
-    inset: 60px 18px 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
-    opacity: 0.35;
-  }
-  .phone-app-placeholder {
-    border-radius: 14px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.04);
-    aspect-ratio: 1 / 1;
-  }
-  .phone-home-icon {
-    position: absolute;
-    top: 60px; left: 18px;
-    width: 56px; height: 56px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--brand), var(--brand-2));
-    display: grid; place-items: center;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 900;
-    font-size: 17px;
-    color: #001a0e;
-    letter-spacing: -0.04em;
-    box-shadow: 0 8px 24px rgba(0,217,126,0.4);
-    opacity: 0;
-    transform: scale(0.4);
-    will-change: transform, opacity;
-  }
-  .phone-home-label {
-    position: absolute;
-    top: 122px; left: 18px;
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text);
-    opacity: 0;
-    transition: opacity 0.5s;
+    font-size: 42px;
+    transform: rotate(-30deg);
   }
 
-  /* Floating dust particles */
+  /* --- Dual phone mockup --- */
+  .transform-phones {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    display: flex;
+    gap: 32px;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .phone-device {
+    position: relative;
+    width: 220px;
+    height: 440px;
+    border-radius: 36px;
+    background: linear-gradient(160deg, #1a1c26, #0a0c14);
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9), inset 0 0 30px rgba(255,255,255,0.03);
+    padding: 10px;
+    flex-shrink: 0;
+  }
+  .phone-device.android {
+    border-radius: 30px;
+  }
+  .phone-screen-2 {
+    width: 100%; height: 100%;
+    border-radius: 28px;
+    background: linear-gradient(180deg, #0f1a3d, #060a1c);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .phone-device.android .phone-screen-2 {
+    border-radius: 22px;
+  }
+  .phone-notch-2 {
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 64px; height: 18px;
+    background: #000;
+    border-radius: 10px;
+    z-index: 10;
+  }
+  .phone-device.android .phone-notch-2 {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    top: 12px;
+    left: 16px;
+    transform: none;
+  }
+
+  /* Home screen grid */
+  .home-grid {
+    position: absolute;
+    inset: 44px 16px 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 14px;
+    align-content: start;
+  }
+  .home-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.9;
+    transition: opacity 0.4s;
+  }
+  .home-app-icon {
+    width: 40px; height: 40px;
+    border-radius: 11px;
+    display: grid; place-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .home-app-icon.whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+  .home-app-icon.chrome { background: linear-gradient(135deg, #4285f4, #ea4335 50%, #fbbc04); }
+  .home-app-icon.gmail { background: linear-gradient(135deg, #ffffff, #f1f3f4); color: #ea4335; }
+  .home-app-icon.instagram { background: linear-gradient(135deg, #833ab4, #fd1d1d 50%, #fcb045); }
+  .home-app-icon.camera { background: linear-gradient(135deg, #2a2a2e, #4a4a52); }
+  .home-app-icon.photos { background: linear-gradient(135deg, #ff6b9d, #ffb347 50%, #4ecdc4); }
+  .home-app-icon.settings { background: linear-gradient(135deg, #6b7280, #4b5563); }
+  .home-app-icon.phone { background: linear-gradient(135deg, #16a34a, #059669); }
+  .home-app-icon.messages { background: linear-gradient(135deg, #22c55e, #16a34a); }
+  .home-app-icon.flyempty {
+    background: linear-gradient(135deg, #0a1f44, #1a3a6b);
+    color: #e8b923;
+    box-shadow: 0 6px 20px rgba(232,185,35,0.4), inset 0 0 15px rgba(232,185,35,0.15);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    position: relative;
+  }
+  .home-app-icon.flyempty::after {
+    content: '✈';
+    position: absolute;
+    font-size: 18px;
+    transform: rotate(-30deg);
+  }
+  .home-app-label {
+    font-size: 8px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px;
+    letter-spacing: 0.01em;
+  }
+  .home-app-icon.flyempty {
+    position: relative;
+  }
+  .home-app-icon.flyempty .flyempty-launch-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 15px;
+    border: 2px solid var(--fly-accent);
+    opacity: 0;
+    animation: none;
+  }
+  .home-app-icon.flyempty.launching .flyempty-launch-ring {
+    animation: flyLaunchRing 1.6s ease-out;
+  }
+  @keyframes flyLaunchRing {
+    0% { opacity: 1; transform: scale(0.8); }
+    100% { opacity: 0; transform: scale(1.8); }
+  }
+  .home-app-icon.flyempty.launching {
+    animation: flyLaunchTap 0.6s ease;
+  }
+  @keyframes flyLaunchTap {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.86); }
+  }
+
+  /* App launched view (inside phone) */
+  .app-launch-view {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    color: #0a1f44;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+  }
+  .app-launch-view.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .app-splash {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a1f44, #1a3a6b);
+    display: grid;
+    place-items: center;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .app-splash.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .app-splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .app-splash-logo {
+    width: 62px; height: 62px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #1a3a6b, #0a1f44);
+    display: grid; place-items: center;
+    color: #e8b923;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    box-shadow: 0 12px 40px rgba(232,185,35,0.35);
+    animation: splashPulse 1.2s ease-in-out infinite;
+    position: relative;
+  }
+  .app-splash-logo::after {
+    content: '✈';
+    position: absolute;
+    font-size: 26px;
+    transform: rotate(-30deg);
+  }
+  @keyframes splashPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .app-splash-text {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  /* App content (FlyEmpty mobile) */
+  .app-content {
+    flex: 1;
+    overflow-y: auto;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 44px;
+    scrollbar-width: none;
+  }
+  .app-content::-webkit-scrollbar { display: none; }
+
+  .app-content-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #eef1f6;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+  .app-content-logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 800;
+    font-size: 12px;
+    color: #0a1f44;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .app-content-logo-mark {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #0a1f44, #1a3a6b);
+    display: grid; place-items: center;
+    color: #e8b923;
+    font-size: 10px;
+    font-weight: 900;
+    position: relative;
+  }
+  .app-content-logo-mark::after {
+    content: '✈';
+    position: absolute;
+    font-size: 9px;
+    transform: rotate(-30deg);
+  }
+  .app-content-hamburger {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .app-content-hamburger span {
+    height: 2px;
+    background: #0a1f44;
+    border-radius: 2px;
+  }
+
+  .app-hero-block {
+    padding: 12px 12px 10px;
+    background: linear-gradient(180deg, #f8f9fc, #ffffff);
+  }
+  .app-hero-block h2 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0a1f44;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 4px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .app-hero-block h2 .gold { color: #e8b923; }
+  .app-hero-block p {
+    font-size: 9px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .app-search-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #ffffff;
+    border: 1px solid #e2e6ee;
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 0 2px 8px rgba(10,31,68,0.05);
+  }
+  .app-search-row {
+    display: flex;
+    gap: 4px;
+  }
+  .app-search-field {
+    flex: 1;
+    padding: 4px 6px;
+    border: 1px solid #eef1f6;
+    border-radius: 5px;
+    background: #fbfcfe;
+  }
+  .app-search-field .lab {
+    font-size: 7px;
+    color: #6b7280;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .app-search-field .val {
+    font-size: 9px;
+    color: #0a1f44;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+  .app-search-btn {
+    background: #0a1f44;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 4px;
+  }
+  .app-badges {
+    display: flex;
+    gap: 6px;
+    font-size: 7.5px;
+    color: #6b7280;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .app-badges span::before {
+    content: '✓ ';
+    color: #16a34a;
+    font-weight: 700;
+  }
+
+  .app-deals-block {
+    padding: 8px 12px 12px;
+  }
+  .app-deals-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .app-deals-head h3 {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0a1f44;
+  }
+  .app-deals-head .view {
+    font-size: 8px;
+    color: #e8b923;
+    font-weight: 700;
+  }
+  .app-deal-card {
+    padding: 6px 8px;
+    border: 1px solid #eef1f6;
+    border-radius: 7px;
+    margin-bottom: 5px;
+    background: #fbfcfe;
+  }
+  .app-deal-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+  .app-route {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    color: #0a1f44;
+  }
+  .app-route .arrow { color: #e8b923; font-weight: 900; }
+  .app-route .seats {
+    font-size: 7.5px;
+    color: #6b7280;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+  .app-price {
+    font-size: 10px;
+    font-weight: 800;
+    color: #0a1f44;
+    letter-spacing: -0.02em;
+  }
+  .app-price .per {
+    font-size: 7px;
+    color: #6b7280;
+    font-weight: 500;
+  }
+  .app-deal-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 7.5px;
+    color: #6b7280;
+  }
+  .app-deal-sub .plane {
+    font-weight: 600;
+    color: #4b5563;
+  }
+  .app-deal-sub .verified {
+    color: #16a34a;
+    font-weight: 600;
+  }
+  .app-deal-sub .verified::before { content: '● '; }
+
+  /* Bottom tab bar */
+  .app-tab-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 44px;
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid #eef1f6;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 6;
+    backdrop-filter: blur(10px);
+  }
+  .app-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 7px;
+    color: #9ba3b4;
+    font-weight: 600;
+  }
+  .app-tab.active { color: #0a1f44; }
+  .app-tab-icon {
+    font-size: 14px;
+    line-height: 1;
+  }
+
   .transform-particle {
     position: absolute;
     width: 4px; height: 4px;
@@ -776,27 +1364,72 @@
     opacity: 0;
     pointer-events: none;
     box-shadow: 0 0 8px var(--brand);
+    top: 50%; left: 50%;
   }
 
   @media (max-width: 960px) {
-    .transform-stage { height: 400px; }
-    .transform-browser { width: 360px; height: 260px; }
-    .transform-icon { width: 120px; height: 120px; border-radius: 28px; font-size: 36px; }
-    .transform-phone { width: 210px; height: 420px; }
+    .transform-section { height: 350vh; }
+    .transform-stage { height: 560px; }
+    .transform-browser { width: 560px; height: 380px; }
+    .fly-hero h1 { font-size: 22px; }
+    .transform-icon { width: 130px; height: 130px; border-radius: 28px; font-size: 36px; }
+    .transform-phones { gap: 24px; }
+    .phone-device { width: 190px; height: 380px; border-radius: 32px; padding: 8px; }
+    .phone-screen-2 { border-radius: 26px; }
+    .phone-device.android .phone-screen-2 { border-radius: 20px; }
   }
   @media (max-width: 640px) {
-    .transform-section { height: 250vh; }
-    .transform-stage { height: 340px; }
-    .transform-browser { width: 300px; height: 220px; }
-    .transform-icon { width: 100px; height: 100px; border-radius: 24px; font-size: 30px; }
-    .transform-phone { width: 180px; height: 360px; border-radius: 32px; padding: 8px; }
-    .transform-phone-screen { border-radius: 26px; }
-    .transform-label { font-size: 11px; top: 8%; }
+    .transform-section { height: 320vh; }
+    .transform-stage { height: 460px; }
+    .transform-browser { width: 420px; height: 300px; }
+    .browser-chrome { height: 28px; padding: 0 10px; }
+    .browser-dot { width: 9px; height: 9px; }
+    .fly-nav { padding: 10px 16px; }
+    .fly-nav-links { display: none; }
+    .fly-logo { font-size: 13px; }
+    .fly-logo-mark { width: 20px; height: 20px; font-size: 11px; }
+    .fly-hero { padding: 14px 16px 12px; }
+    .fly-hero h1 { font-size: 17px; }
+    .fly-hero p { font-size: 10px; margin-bottom: 8px; }
+    .fly-search { padding: 4px; }
+    .fly-search-field { padding: 4px 6px; }
+    .fly-search-field .lab { font-size: 7px; }
+    .fly-search-field .val { font-size: 9px; }
+    .fly-search-btn { padding: 6px 12px; font-size: 9px; }
+    .fly-deals { padding: 8px 16px 10px; }
+    .fly-deals-head h2 { font-size: 11px; }
+    .fly-deal-card { padding: 6px 8px; gap: 8px; }
+    .fly-route { font-size: 10px; }
+    .fly-price .amt { font-size: 11px; }
+    .fly-price .per { font-size: 8px; }
+    .transform-icon { width: 100px; height: 100px; border-radius: 22px; font-size: 28px; }
+    .transform-icon::after { font-size: 28px; }
+    .transform-phones { gap: 14px; }
+    .phone-device { width: 150px; height: 300px; border-radius: 26px; padding: 6px; }
+    .phone-screen-2 { border-radius: 22px; }
+    .phone-device.android .phone-screen-2 { border-radius: 16px; }
+    .home-grid { inset: 36px 10px 36px; gap: 10px; }
+    .home-app-icon { width: 28px; height: 28px; border-radius: 8px; font-size: 12px; }
+    .home-app-label { font-size: 6px; max-width: 40px; }
+    .app-content-nav { padding: 8px 10px; }
+    .app-hero-block { padding: 10px; }
+    .app-hero-block h2 { font-size: 12px; }
+    .app-hero-block p { font-size: 8px; }
+    .app-tab-bar { height: 36px; }
+    .app-tab { font-size: 6px; }
+    .app-tab-icon { font-size: 11px; }
+    .transform-label { font-size: 11px; top: 5%; }
   }
+
   @media (prefers-reduced-motion: reduce) {
     .transform-section { height: auto; padding: 80px 0; }
     .transform-sticky { position: relative; height: auto; }
-    .transform-browser, .transform-icon, .transform-phone { position: relative; opacity: 1; transform: none; }
+    .transform-browser { opacity: 0 !important; }
+    .transform-icon { opacity: 0 !important; }
+    .transform-phones { position: relative; opacity: 1 !important; transform: none !important; }
+    .app-launch-view { opacity: 1 !important; transform: none !important; position: relative; }
+    .home-grid { display: none; }
+    .app-splash { display: none; }
   }
 
   /* ============ SECTIONS ============ */
@@ -1648,78 +2281,483 @@
   </div>
 </div>
 
-<!-- TRANSFORMATION (scroll-driven) -->
+<!-- TRANSFORMATION SECTION -->
 <section class="transform-section" id="transform">
   <div class="transform-sticky">
     <div class="transform-label active" id="labelStart">
-      <span class="label-accent">Your website</span> · Static. Browser-based. Limited.
+      <span class="label-accent">Your website</span> · FlyEmpty.ng
     </div>
     <div class="transform-label" id="labelMid">
-      <span class="label-accent">Your app</span> · Native. Installable. Yours.
+      <span class="label-accent">Your app</span> · Built in 24 hours
     </div>
     <div class="transform-label" id="labelEnd">
-      <span class="label-accent">Delivered</span> · In under 24 hours.
+      <span class="label-accent">Delivered</span> · iOS and Android
     </div>
 
     <div class="transform-stage" id="transformStage">
       <div class="transform-halo" id="transformHalo"></div>
 
+      <!-- Browser mockup showing FlyEmpty.ng -->
       <div class="transform-browser" id="transformBrowser">
-        <div class="browser-top">
+        <div class="browser-chrome">
           <div class="browser-dot red"></div>
           <div class="browser-dot yellow"></div>
           <div class="browser-dot green"></div>
-          <div class="browser-url"></div>
+          <div class="browser-url">flyempty.ng</div>
         </div>
-        <div class="browser-content">
-          <div class="browser-hero"></div>
-          <div class="browser-row">
-            <div class="browser-block">
-              <div class="browser-lines">
-                <div class="browser-line w80"></div>
-                <div class="browser-line w60"></div>
-                <div class="browser-line w40"></div>
+        <div class="fly-site">
+          <div class="fly-nav">
+            <div class="fly-logo">
+              <div class="fly-logo-mark"></div>
+              FlyEmpty<span class="ng">.ng</span>
+            </div>
+            <div class="fly-nav-links">
+              <span>Deals</span>
+              <span>How it works</span>
+              <span>Why us</span>
+              <span>For operators</span>
+            </div>
+            <div class="fly-nav-signin">Sign in</div>
+          </div>
+
+          <div class="fly-hero">
+            <h1>Fly private <span class="gold">for less.</span></h1>
+            <p>Verified empty-leg flights from NCAA-licensed operators, priced in full before you pay.</p>
+
+            <div class="fly-search">
+              <div class="fly-search-field">
+                <div class="lab">From</div>
+                <div class="val">Lagos (LOS)</div>
+              </div>
+              <div class="fly-search-field">
+                <div class="lab">To</div>
+                <div class="val">Abuja (ABV)</div>
+              </div>
+              <div class="fly-search-field">
+                <div class="lab">Date</div>
+                <div class="val">mm/dd/yyyy</div>
+              </div>
+              <div class="fly-search-field" style="max-width: 60px; flex: 0 0 auto;">
+                <div class="lab">Seats</div>
+                <div class="val">1</div>
+              </div>
+              <div class="fly-search-btn">Search</div>
+            </div>
+
+            <div class="fly-badges">
+              <span>0 verified operators</span>
+              <span>3 live now</span>
+              <span>NCAA AOC checked</span>
+            </div>
+          </div>
+
+          <div class="fly-deals">
+            <div class="fly-deals-head">
+              <h2>Today's live deals</h2>
+              <span class="view">See all</span>
+            </div>
+
+            <div class="fly-deal-card">
+              <div class="fly-route">
+                LOS <span class="arrow">→</span> PHC
+              </div>
+              <div class="fly-deal-meta">
+                <span class="plane">5N-DEMO2 (Cessna Citation XLS+)</span>
+                <span class="sub">04:41 · 8 seats left</span>
+                <span class="verified">SkyJet Elite DEMO verified</span>
+              </div>
+              <div class="fly-price">
+                <div class="amt">₦520,000</div>
+                <div class="per">/seat</div>
               </div>
             </div>
-            <div class="browser-block">
-              <div class="browser-lines">
-                <div class="browser-line w80"></div>
-                <div class="browser-line w60"></div>
-                <div class="browser-line w40"></div>
+
+            <div class="fly-deal-card">
+              <div class="fly-route">
+                LOS <span class="arrow">→</span> ABV
+              </div>
+              <div class="fly-deal-meta">
+                <span class="plane">5N-DEMO1 (Gulfstream G280)</span>
+                <span class="sub">14:00 · 4 seats left</span>
+                <span class="verified">SkyJet Elite DEMO verified</span>
+              </div>
+              <div class="fly-price">
+                <div class="amt">₦350,000</div>
+                <div class="per">/seat</div>
               </div>
             </div>
-            <div class="browser-block">
-              <div class="browser-lines">
-                <div class="browser-line w80"></div>
-                <div class="browser-line w60"></div>
-                <div class="browser-line w40"></div>
+
+            <div class="fly-deal-card">
+              <div class="fly-route">
+                LOS <span class="arrow">→</span> ABV
+              </div>
+              <div class="fly-deal-meta">
+                <span class="plane">5N-DEMO1 (Gulfstream G280)</span>
+                <span class="sub">14:00 · 4 seats left</span>
+                <span class="verified">SkyJet Elite DEMO verified</span>
+              </div>
+              <div class="fly-price">
+                <div class="amt">₦350,000</div>
+                <div class="per">/seat</div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="transform-icon" id="transformIcon">W2A</div>
+      <!-- Morphing icon -->
+      <div class="transform-icon" id="transformIcon">FE</div>
 
-      <div class="transform-phone" id="transformPhone">
-        <div class="transform-phone-screen">
-          <div class="transform-phone-notch"></div>
-          <div class="phone-home-grid">
-            <div class="phone-app-placeholder"></div>
-            <div class="phone-app-placeholder"></div>
-            <div class="phone-app-placeholder"></div>
-            <div class="phone-app-placeholder"></div>
-            <div class="phone-app-placeholder"></div>
-            <div class="phone-app-placeholder"></div>
+      <!-- Dual phone mockup -->
+      <div class="transform-phones" id="transformPhones">
+        <!-- iPhone -->
+        <div class="phone-device iphone">
+          <div class="phone-screen-2">
+            <div class="phone-notch-2"></div>
+
+            <!-- Home screen -->
+            <div class="home-grid">
+              <div class="home-app">
+                <div class="home-app-icon flyempty" id="flyIconIos">
+                  <div class="flyempty-launch-ring"></div>
+                </div>
+                <div class="home-app-label">FlyEmpty</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon whatsapp">💬</div>
+                <div class="home-app-label">WhatsApp</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon chrome">🌐</div>
+                <div class="home-app-label">Chrome</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon gmail">✉</div>
+                <div class="home-app-label">Gmail</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon instagram">📷</div>
+                <div class="home-app-label">Instagram</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon camera">📸</div>
+                <div class="home-app-label">Camera</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon photos">🌸</div>
+                <div class="home-app-label">Photos</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon settings">⚙</div>
+                <div class="home-app-label">Settings</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon phone">📞</div>
+                <div class="home-app-label">Phone</div>
+              </div>
+            </div>
+
+            <!-- App launched view -->
+            <div class="app-launch-view" id="appLaunchIos">
+              <div class="app-content">
+                <div class="app-content-nav">
+                  <div class="app-content-logo">
+                    <div class="app-content-logo-mark"></div>
+                    FlyEmpty<span class="ng" style="font-size: 9px; color: #6b7280; margin-left: 2px; font-weight: 500;">.ng</span>
+                  </div>
+                  <div class="app-content-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+
+                <div class="app-hero-block">
+                  <h2>Fly private <span class="gold">for less.</span></h2>
+                  <p>Verified empty-leg flights from NCAA-licensed operators.</p>
+                  <div class="app-search-compact">
+                    <div class="app-search-row">
+                      <div class="app-search-field">
+                        <div class="lab">From</div>
+                        <div class="val">LOS</div>
+                      </div>
+                      <div class="app-search-field">
+                        <div class="lab">To</div>
+                        <div class="val">ABV</div>
+                      </div>
+                    </div>
+                    <div class="app-search-row">
+                      <div class="app-search-field">
+                        <div class="lab">Date</div>
+                        <div class="val">mm/dd/yyyy</div>
+                      </div>
+                      <div class="app-search-field">
+                        <div class="lab">Seats</div>
+                        <div class="val">1</div>
+                      </div>
+                    </div>
+                    <div class="app-search-btn">Search flights</div>
+                  </div>
+                  <div class="app-badges">
+                    <span>NCAA AOC checked</span>
+                    <span>Full price upfront</span>
+                  </div>
+                </div>
+
+                <div class="app-deals-block">
+                  <div class="app-deals-head">
+                    <h3>Today's live deals</h3>
+                    <span class="view">See all</span>
+                  </div>
+
+                  <div class="app-deal-card">
+                    <div class="app-deal-row">
+                      <div class="app-route">
+                        LOS <span class="arrow">→</span> PHC
+                        <span class="seats">8 seats</span>
+                      </div>
+                      <div class="app-price">₦520k <span class="per">/seat</span></div>
+                    </div>
+                    <div class="app-deal-sub">
+                      <span class="plane">Citation XLS+ · 04:41</span>
+                      <span class="verified">verified</span>
+                    </div>
+                  </div>
+
+                  <div class="app-deal-card">
+                    <div class="app-deal-row">
+                      <div class="app-route">
+                        LOS <span class="arrow">→</span> ABV
+                        <span class="seats">4 seats</span>
+                      </div>
+                      <div class="app-price">₦350k <span class="per">/seat</span></div>
+                    </div>
+                    <div class="app-deal-sub">
+                      <span class="plane">Gulfstream G280 · 14:00</span>
+                      <span class="verified">verified</span>
+                    </div>
+                  </div>
+
+                  <div class="app-deal-card">
+                    <div class="app-deal-row">
+                      <div class="app-route">
+                        LOS <span class="arrow">→</span> ABV
+                        <span class="seats">4 seats</span>
+                      </div>
+                      <div class="app-price">₦350k <span class="per">/seat</span></div>
+                    </div>
+                    <div class="app-deal-sub">
+                      <span class="plane">Gulfstream G280 · 14:00</span>
+                      <span class="verified">verified</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-tab-bar">
+                <div class="app-tab active">
+                  <div class="app-tab-icon">🏠</div>
+                  Home
+                </div>
+                <div class="app-tab">
+                  <div class="app-tab-icon">🔍</div>
+                  Search
+                </div>
+                <div class="app-tab">
+                  <div class="app-tab-icon">🎫</div>
+                  Bookings
+                </div>
+                <div class="app-tab">
+                  <div class="app-tab-icon">👤</div>
+                  Profile
+                </div>
+              </div>
+
+              <div class="app-splash" id="appSplashIos">
+                <div class="app-splash-content">
+                  <div class="app-splash-logo"></div>
+                  <div class="app-splash-text">FlyEmpty.ng</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="phone-home-icon" id="phoneHomeIcon">W2A</div>
-          <div class="phone-home-label" id="phoneHomeLabel">Your App</div>
+        </div>
+
+        <!-- Android -->
+        <div class="phone-device android">
+          <div class="phone-screen-2">
+            <div class="phone-notch-2"></div>
+
+            <div class="home-grid">
+              <div class="home-app">
+                <div class="home-app-icon flyempty" id="flyIconAndroid">
+                  <div class="flyempty-launch-ring"></div>
+                </div>
+                <div class="home-app-label">FlyEmpty</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon whatsapp">💬</div>
+                <div class="home-app-label">WhatsApp</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon chrome">🌐</div>
+                <div class="home-app-label">Chrome</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon gmail">✉</div>
+                <div class="home-app-label">Gmail</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon instagram">📷</div>
+                <div class="home-app-label">Instagram</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon camera">📸</div>
+                <div class="home-app-label">Camera</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon photos">🌸</div>
+                <div class="home-app-label">Photos</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon settings">⚙</div>
+                <div class="home-app-label">Settings</div>
+              </div>
+              <div class="home-app">
+                <div class="home-app-icon messages">💬</div>
+                <div class="home-app-label">Messages</div>
+              </div>
+            </div>
+
+            <div class="app-launch-view" id="appLaunchAndroid">
+              <div class="app-content">
+                <div class="app-content-nav">
+                  <div class="app-content-logo">
+                    <div class="app-content-logo-mark"></div>
+                    FlyEmpty<span class="ng" style="font-size: 9px; color: #6b7280; margin-left: 2px; font-weight: 500;">.ng</span>
+                  </div>
+                  <div class="app-content-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+
+                <div class="app-hero-block">
+                  <h2>Fly private <span class="gold">for less.</span></h2>
+                  <p>Verified empty-leg flights from NCAA-licensed operators.</p>
+                  <div class="app-search-compact">
+                    <div class="app-search-row">
+                      <div class="app-search-field">
+                        <div class="lab">From</div>
+                        <div class="val">LOS</div>
+                      </div>
+                      <div class="app-search-field">
+                        <div class="lab">To</div>
+                        <div class="val">ABV</div>
+                      </div>
+                    </div>
+                    <div class="app-search-row">
+                      <div class="app-search-field">
+                        <div class="lab">Date</div>
+                        <div class="val">mm/dd/yyyy</div>
+                      </div>
+                      <div class="app-search-field">
+                        <div class="lab">Seats</div>
+                        <div class="val">1</div>
+                      </div>
+                    </div>
+                    <div class="app-search-btn">Search flights</div>
+                  </div>
+                  <div class="app-badges">
+                    <span>NCAA AOC checked</span>
+                    <span>Full price upfront</span>
+                  </div>
+                </div>
+
+                <div class="app-deals-block">
+                  <div class="app-deals-head">
+                    <h3>Today's live deals</h3>
+                    <span class="view">See all</span>
+                  </div>
+
+                  <div class="app-deal-card">
+                    <div class="app-deal-row">
+                      <div class="app-route">
+                        LOS <span class="arrow">→</span> PHC
+                        <span class="seats">8 seats</span>
+                      </div>
+                      <div class="app-price">₦520k <span class="per">/seat</span></div>
+                    </div>
+                    <div class="app-deal-sub">
+                      <span class="plane">Citation XLS+ · 04:41</span>
+                      <span class="verified">verified</span>
+                    </div>
+                  </div>
+
+                  <div class="app-deal-card">
+                    <div class="app-deal-row">
+                      <div class="app-route">
+                        LOS <span class="arrow">→</span> ABV
+                        <span class="seats">4 seats</span>
+                      </div>
+                      <div class="app-price">₦350k <span class="per">/seat</span></div>
+                    </div>
+                    <div class="app-deal-sub">
+                      <span class="plane">Gulfstream G280 · 14:00</span>
+                      <span class="verified">verified</span>
+                    </div>
+                  </div>
+
+                  <div class="app-deal-card">
+                    <div class="app-deal-row">
+                      <div class="app-route">
+                        LOS <span class="arrow">→</span> ABV
+                        <span class="seats">4 seats</span>
+                      </div>
+                      <div class="app-price">₦350k <span class="per">/seat</span></div>
+                    </div>
+                    <div class="app-deal-sub">
+                      <span class="plane">Gulfstream G280 · 14:00</span>
+                      <span class="verified">verified</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-tab-bar">
+                <div class="app-tab active">
+                  <div class="app-tab-icon">🏠</div>
+                  Home
+                </div>
+                <div class="app-tab">
+                  <div class="app-tab-icon">🔍</div>
+                  Search
+                </div>
+                <div class="app-tab">
+                  <div class="app-tab-icon">🎫</div>
+                  Bookings
+                </div>
+                <div class="app-tab">
+                  <div class="app-tab-icon">👤</div>
+                  Profile
+                </div>
+              </div>
+
+              <div class="app-splash" id="appSplashAndroid">
+                <div class="app-splash-content">
+                  <div class="app-splash-logo"></div>
+                  <div class="app-splash-text">FlyEmpty.ng</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="transform-particle" id="particle1"></div>
-      <div class="transform-particle" id="particle2"></div>
-      <div class="transform-particle" id="particle3"></div>
+      <div class="transform-particle"></div>
+      <div class="transform-particle"></div>
+      <div class="transform-particle"></div>
     </div>
   </div>
 </section>
@@ -2065,7 +3103,7 @@
           <div class="logo-mark">W2A</div>
           <span>web2app<span class="ng">.ng</span></span>
         </a>
-        <p>We turn Startup websites into real functional mobile apps. Delivered in under 24 hours.</p>
+        <p>We turn startup websites into real functional mobile apps. Delivered in under 24 hours.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
@@ -2518,7 +3556,7 @@
     }
   });
 
-  // ============ SELECT PACKAGE FROM PRICING ============
+  // ============ SELECT PACKAGE ============
   function selectPackage(platform) {
     const radio = document.querySelector(`input[name="platform"][value="${platform}"]`);
     if (radio) radio.checked = true;
@@ -2574,36 +3612,74 @@
   const transformSection = document.getElementById('transform');
   const transformBrowser = document.getElementById('transformBrowser');
   const transformIcon = document.getElementById('transformIcon');
-  const transformPhone = document.getElementById('transformPhone');
+  const transformPhones = document.getElementById('transformPhones');
   const transformHalo = document.getElementById('transformHalo');
-  const phoneHomeIcon = document.getElementById('phoneHomeIcon');
-  const phoneHomeLabel = document.getElementById('phoneHomeLabel');
   const labelStart = document.getElementById('labelStart');
   const labelMid = document.getElementById('labelMid');
   const labelEnd = document.getElementById('labelEnd');
-  const particles = [
-    document.getElementById('particle1'),
-    document.getElementById('particle2'),
-    document.getElementById('particle3')
-  ];
+
+  const appLaunchIos = document.getElementById('appLaunchIos');
+  const appLaunchAndroid = document.getElementById('appLaunchAndroid');
+  const appSplashIos = document.getElementById('appSplashIos');
+  const appSplashAndroid = document.getElementById('appSplashAndroid');
+  const flyIconIos = document.getElementById('flyIconIos');
+  const flyIconAndroid = document.getElementById('flyIconAndroid');
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
   }
-
-  // Easing: smooth in, smooth out
   function easeInOut(t) {
     return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   }
-
   function easeOutBack(t) {
     const c1 = 1.70158;
     const c3 = c1 + 1;
     return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
   }
 
+  // Launch state management
+  let launchState = 'idle'; // idle | launched
+  let launchTimer = null;
+  let launchTimeout = null;
+
+  function resetLaunch() {
+    if (launchTimer) { clearTimeout(launchTimer); launchTimer = null; }
+    if (launchTimeout) { clearTimeout(launchTimeout); launchTimeout = null; }
+    launchState = 'idle';
+    appLaunchIos.classList.remove('active');
+    appLaunchAndroid.classList.remove('active');
+    appSplashIos.classList.remove('active');
+    appSplashAndroid.classList.remove('active');
+    flyIconIos.classList.remove('launching');
+    flyIconAndroid.classList.remove('launching');
+  }
+
+  function triggerLaunch() {
+    if (launchState === 'launched') return;
+    launchState = 'launched';
+
+    // Ring animation on both icons
+    flyIconIos.classList.add('launching');
+    flyIconAndroid.classList.add('launching');
+
+    // Splash appears at 300ms
+    launchTimer = setTimeout(() => {
+      appSplashIos.classList.add('active');
+      appSplashAndroid.classList.add('active');
+    }, 300);
+
+    // Splash ends and app content appears at 1300ms
+    launchTimer = setTimeout(() => {
+      appSplashIos.classList.remove('active');
+      appSplashAndroid.classList.remove('active');
+      appLaunchIos.classList.add('active');
+      appLaunchAndroid.classList.add('active');
+    }, 1400);
+  }
+
+  let autoScrollTimeout = null;
   function updateTransform() {
     if (!transformSection) return;
 
@@ -2611,89 +3687,74 @@
     const scrollable = rect.height - window.innerHeight;
     const rawProgress = clamp(-rect.top / scrollable, 0, 1);
 
-    // Phase 1: 0.00 - 0.45 browser shrinks and rounds
-    // Phase 2: 0.40 - 0.70 browser becomes icon
-    // Phase 3: 0.60 - 0.85 icon moves into phone
-    // Phase 4: 0.80 - 1.00 phone visible and settled
-
-    // --- Browser animation (phase 1 + 2) ---
-    const p1 = clamp(rawProgress / 0.65, 0, 1);
+    // --- Browser animation ---
+    const p1 = clamp(rawProgress / 0.55, 0, 1);
     const p1e = easeInOut(p1);
 
-    const browserScale = 1 - (p1e * 0.72); // from 1 to 0.28
-    const browserRadius = 12 + (p1e * 20); // 12px to 32px
-    const browserOpacity = clamp(1 - (p1 - 0.75) / 0.25, 0, 1);
+    const browserScale = 1 - (p1e * 0.78);
+    const browserRadius = 14 + (p1e * 24);
+    const browserOpacity = clamp(1 - (p1 - 0.7) / 0.3, 0, 1);
 
     transformBrowser.style.transform = `translate(-50%, -50%) scale(${browserScale})`;
     transformBrowser.style.borderRadius = `${browserRadius}px`;
     transformBrowser.style.opacity = browserOpacity;
 
-    // --- Icon animation (phase 2 + 3) ---
-    const iconFadeIn = clamp((rawProgress - 0.5) / 0.15, 0, 1);
-    const iconScale = easeOutBack(iconFadeIn) * 1;
-    const iconOpacity = iconFadeIn;
+    // --- Icon animation ---
+    const iconFadeIn = clamp((rawProgress - 0.42) / 0.18, 0, 1);
+    const iconScale = easeOutBack(iconFadeIn);
 
-    // As we approach phase 3, shrink icon and move it up toward phone position
-    const p3 = clamp((rawProgress - 0.75) / 0.15, 0, 1);
+    const p3 = clamp((rawProgress - 0.62) / 0.18, 0, 1);
     const p3e = easeInOut(p3);
 
-    // Icon final position: inside phone top-left
-    // Stage center is (0,0) transform-origin. Phone is centered in stage.
-    // Phone is 240x480. Phone top-left inner corner is at approx (-100, -200) relative to stage center.
-    // Icon target position: (-78, -152) relative to stage center (a bit inset)
-
+    // Icon flies to upper-left corner of the dual-phone stage
     const iconStartX = 0;
     const iconStartY = 0;
-    const iconEndX = -78;
-    const iconEndY = -152;
+    const iconEndX = -200;
+    const iconEndY = -200;
 
     const currentIconX = iconStartX + (iconEndX - iconStartX) * p3e;
     const currentIconY = iconStartY + (iconEndY - iconStartY) * p3e;
-    const currentIconScale = iconScale * (1 - p3e * 0.6); // shrink from 1 to 0.4
-    const currentIconOpacity = iconOpacity * (1 - p3e); // fade out as it merges into phone icon
+    const currentIconScale = iconScale * (1 - p3e * 0.65);
+    const currentIconOpacity = iconFadeIn * (1 - p3e);
 
     transformIcon.style.opacity = currentIconOpacity;
     transformIcon.style.transform = `translate(calc(-50% + ${currentIconX}px), calc(-50% + ${currentIconY}px)) scale(${currentIconScale})`;
 
     // --- Halo ---
-    const haloActive = rawProgress > 0.2 && rawProgress < 0.9;
+    const haloActive = rawProgress > 0.15 && rawProgress < 0.85;
     transformHalo.classList.toggle('active', haloActive);
 
-    // --- Phone (phase 4) ---
-    const phoneFade = clamp((rawProgress - 0.72) / 0.18, 0, 1);
+    // --- Dual phones fade in ---
+    const phoneFade = clamp((rawProgress - 0.68) / 0.18, 0, 1);
     const phoneEase = easeOutBack(phoneFade);
-    const phoneTranslateY = (1 - phoneEase) * 80;
-    const phoneScale = 0.9 + phoneEase * 0.1;
+    const phoneScale = 0.85 + phoneEase * 0.15;
 
-    transformPhone.style.opacity = phoneFade;
-    transformPhone.style.transform = `translate(-50%, calc(-50% + ${phoneTranslateY}px)) scale(${phoneScale})`;
-
-    // --- Phone home icon (appears after phone lands) ---
-    const appIconDrop = clamp((rawProgress - 0.88) / 0.12, 0, 1);
-    const appIconEase = easeOutBack(appIconDrop);
-
-    phoneHomeIcon.style.opacity = appIconDrop;
-    phoneHomeIcon.style.transform = `scale(${appIconEase})`;
-    phoneHomeLabel.style.opacity = appIconDrop;
+    transformPhones.style.opacity = phoneFade;
+    transformPhones.style.transform = `translate(-50%, -50%) scale(${phoneScale})`;
 
     // --- Labels ---
-    labelStart.classList.toggle('active', rawProgress < 0.3);
-    labelMid.classList.toggle('active', rawProgress >= 0.3 && rawProgress < 0.72);
-    labelEnd.classList.toggle('active', rawProgress >= 0.72);
+    labelStart.classList.toggle('active', rawProgress < 0.28);
+    labelMid.classList.toggle('active', rawProgress >= 0.28 && rawProgress < 0.68);
+    labelEnd.classList.toggle('active', rawProgress >= 0.68);
 
-    // --- Particles (burst during icon phase) ---
-    const burstProgress = clamp((rawProgress - 0.5) / 0.25, 0, 1);
-    const burstOpacity = Math.sin(burstProgress * Math.PI);
+    // --- Auto-play: trigger app launch when user reaches ~85% and pause if scrolled away ---
+    const launchZone = rawProgress > 0.85 && rawProgress < 0.98;
 
-    particles.forEach((p, i) => {
-      if (!p) return;
-      const angle = (i / particles.length) * Math.PI * 2 + burstProgress * 1.5;
-      const distance = 120 * easeInOut(burstProgress);
-      const x = Math.cos(angle) * distance;
-      const y = Math.sin(angle) * distance;
-      p.style.opacity = burstOpacity * 0.8;
-      p.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${1 + burstProgress})`;
-    });
+    if (launchZone && launchState === 'idle') {
+      // Clear any pending resume timeout
+      if (autoScrollTimeout) { clearTimeout(autoScrollTimeout); autoScrollTimeout = null; }
+      // Small delay so user sees the phones settle first
+      autoScrollTimeout = setTimeout(() => {
+        triggerLaunch();
+      }, 500);
+    } else if (!launchZone && rawProgress < 0.75 && launchState === 'launched') {
+      // User scrolled away: pause and reset
+      if (autoScrollTimeout) { clearTimeout(autoScrollTimeout); autoScrollTimeout = null; }
+      resetLaunch();
+    } else if (!launchZone && launchState === 'idle') {
+      // Cancel pending launch if user scrolled away before it triggered
+      if (autoScrollTimeout) { clearTimeout(autoScrollTimeout); autoScrollTimeout = null; }
+    }
   }
 
   if (!prefersReduced && transformSection) {
@@ -2710,15 +3771,13 @@
     window.addEventListener('resize', updateTransform);
     updateTransform();
   } else if (prefersReduced && transformSection) {
-    // Static final frame
     transformBrowser.style.opacity = '0';
     transformIcon.style.opacity = '0';
-    transformPhone.style.opacity = '1';
-    transformPhone.style.transform = 'translate(-50%, -50%) scale(1)';
-    phoneHomeIcon.style.opacity = '1';
-    phoneHomeIcon.style.transform = 'scale(1)';
-    phoneHomeLabel.style.opacity = '1';
+    transformPhones.style.opacity = '1';
+    transformPhones.style.transform = 'translate(-50%, -50%) scale(1)';
     transformHalo.classList.add('active');
+    appLaunchIos.classList.add('active');
+    appLaunchAndroid.classList.add('active');
   }
 
   console.log('%cweb2app.ng', 'font-size:24px; font-weight:800; color:#00d97e;');
