@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Web2App.ng - Turn Your Website Into a Mobile App</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2300d97e'/%3E%3Ctext x='50' y='68' font-family='system-ui,sans-serif' font-weight='900' font-size='48' fill='%23001a0e' text-anchor='middle'%3EW2A%3C/text%3E%3C/svg%3E" />
-<meta name="description" content="Convert your website into an Android and iOS mobile app in under 24 hours. Built for Nigerian businesses." />
+<meta name="description" content="Convert your website into an Android and iOS mobile app in under 24 hours. Built for Nigerian startups." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,6 +73,26 @@
   img { max-width: 100%; display: block; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
+  /* ============ WOBBLE ANIMATION ============ */
+  @keyframes wobble {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(-2deg); }
+    30% { transform: rotate(1.6deg); }
+    45% { transform: rotate(-1.2deg); }
+    60% { transform: rotate(0.8deg); }
+    75% { transform: rotate(-0.4deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @keyframes wobble-scale {
+    0% { transform: rotate(0deg) scale(1); }
+    15% { transform: rotate(-2deg) scale(1.02); }
+    30% { transform: rotate(1.6deg) scale(1.02); }
+    45% { transform: rotate(-1.2deg) scale(1.01); }
+    60% { transform: rotate(0.8deg) scale(1.01); }
+    75% { transform: rotate(-0.4deg) scale(1); }
+    100% { transform: rotate(0deg) scale(1); }
+  }
+
   /* ============ LAZY SECTIONS ============ */
   .lazy-section {
     opacity: 0;
@@ -98,18 +118,25 @@
   /* ============ FLOATING FORM BAR ============ */
   .floating-bar {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 200;
+    top: 76px;
+    left: 0; right: 0;
+    z-index: 140;
     padding: 10px 20px;
-    background: rgba(10,12,20,0.82);
+    background: rgba(10,12,20,0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    transform: translateY(-100%);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-top: 1px solid var(--border);
+    transform: translateY(-200%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s;
     display: none;
+    opacity: 0;
   }
-  .floating-bar.visible { transform: translateY(0); display: block; }
+  .floating-bar.visible {
+    transform: translateY(0);
+    display: block;
+    opacity: 1;
+  }
   .floating-bar-inner {
     max-width: var(--max);
     margin: 0 auto;
@@ -174,6 +201,7 @@
   .floating-bar-close:hover {
     background: var(--glass-strong);
     color: var(--text);
+    animation: wobble 0.5s ease-in-out;
   }
 
   /* ============ NAV ============ */
@@ -208,6 +236,7 @@
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: -0.04em;
   }
+  .logo:hover .logo-mark { animation: wobble 0.5s ease-in-out; }
   .logo .ng { color: var(--brand); }
 
   .nav-links {
@@ -236,6 +265,7 @@
   }
   .nav-links a:hover { color: var(--text); }
   .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a:hover { animation: wobble 0.5s ease-in-out; }
 
   .nav-cta {
     display: flex;
@@ -323,7 +353,7 @@
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: -0.01em;
   }
-  .mobile-menu-links a:hover { color: var(--text); padding-left: 12px; }
+  .mobile-menu-links a:hover { color: var(--text); padding-left: 12px; animation: wobble 0.5s ease-in-out; }
   .mobile-menu-links a::after {
     content: '→';
     color: var(--brand);
@@ -362,9 +392,18 @@
     color: #001a0e;
     box-shadow: 0 4px 20px rgba(0,217,126,0.25);
   }
-  .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 32px rgba(0,217,126,0.45); }
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0,217,126,0.45);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
   .btn-ghost { background: var(--glass); color: var(--text); border: 1px solid var(--border); }
-  .btn-ghost:hover { background: var(--glass-strong); border-color: var(--border-strong); transform: translateY(-2px); }
+  .btn-ghost:hover {
+    background: var(--glass-strong);
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
 
   /* ============ HERO ============ */
   .hero { padding: 72px 0 80px; position: relative; overflow: hidden; }
@@ -452,34 +491,214 @@
   }
   .phone-notch {
     position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-    width: 76px; height: 22px; background: #000; border-radius: 12px; z-index: 2;
+    width: 76px; height: 22px; background: #000; border-radius: 12px; z-index: 20;
   }
-  .app-header {
-    padding: 44px 20px 16px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 13px; color: var(--text-dim);
+
+  /* ============ HERO APP (Nigerian e-commerce) ============ */
+  .hero-app {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #0a0e18, #05060a);
+    padding-top: 40px;
+    overflow: hidden;
   }
-  .app-logo {
-    width: 30px; height: 30px; border-radius: 9px;
+  .hero-app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .hero-app-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .hero-app-brand-mark {
+    width: 26px; height: 26px;
+    border-radius: 8px;
     background: linear-gradient(135deg, var(--brand), var(--brand-2));
     display: grid; place-items: center;
-    font-weight: 900; color: #001a0e; font-size: 12px;
-    font-family: 'Space Grotesk', sans-serif;
+    color: #001a0e;
+    font-size: 13px;
+    font-weight: 900;
   }
-  .app-body { padding: 8px 20px; }
-  .app-card {
-    background: var(--glass); border: 1px solid var(--border);
-    border-radius: 14px; padding: 14px; margin-bottom: 10px;
-    animation: slideUp 0.6s backwards;
+  .hero-app-cart {
+    position: relative;
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: grid; place-items: center;
+    font-size: 15px;
+    color: var(--text);
   }
-  .app-card:nth-child(1) { animation-delay: 0.3s; }
-  .app-card:nth-child(2) { animation-delay: 0.5s; }
-  .app-card:nth-child(3) { animation-delay: 0.7s; }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  .app-card-title { height: 8px; width: 60%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); border-radius: 4px; margin-bottom: 10px; }
-  .app-card-line { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 6px; }
-  .app-card-line.short { width: 70%; }
-  .app-card-line.shorter { width: 45%; }
+  .hero-app-cart-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    min-width: 16px; height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: var(--brand);
+    color: #001a0e;
+    font-size: 9px;
+    font-weight: 800;
+    display: grid; place-items: center;
+    border: 2px solid #0a0e18;
+  }
+  .hero-app-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 16px 10px;
+    padding: 9px 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    font-size: 11.5px;
+    color: var(--text-dimmer);
+  }
+  .hero-app-search-icon {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .hero-app-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 0 16px 10px;
+    overflow: hidden;
+  }
+  .hero-app-tab {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.07);
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+  .hero-app-tab.active {
+    background: rgba(0,217,126,0.14);
+    border-color: rgba(0,217,126,0.4);
+    color: var(--brand);
+  }
+  .hero-app-section {
+    padding: 4px 16px 8px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .hero-app-section h3 {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .hero-app-section span {
+    font-size: 10.5px;
+    color: var(--brand);
+    font-weight: 600;
+  }
+  .hero-app-products {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 16px 12px;
+    flex: 1;
+    overflow: hidden;
+  }
+  .hero-app-product {
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-app-product-img {
+    aspect-ratio: 1 / 1;
+    position: relative;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+  }
+  .hero-app-product-img.img-shoe { background: linear-gradient(135deg, #1a1c28, #2a1e30); }
+  .hero-app-product-img.img-phone { background: linear-gradient(135deg, #0f1a2e, #0a1420); }
+  .hero-app-product-img.img-bag { background: linear-gradient(135deg, #2a1f14, #1a140c); }
+  .hero-app-product-img.img-watch { background: linear-gradient(135deg, #1a1418, #2a1f24); }
+  .hero-app-product-badge {
+    position: absolute;
+    top: 6px; left: 6px;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: rgba(0,217,126,0.9);
+    color: #001a0e;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+  .hero-app-product-info {
+    padding: 8px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-app-product-name {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .hero-app-product-price {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--brand);
+    letter-spacing: -0.01em;
+  }
+  .hero-app-product-price .old {
+    font-size: 9px;
+    color: var(--text-dimmer);
+    text-decoration: line-through;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+  .hero-app-tabbar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 54px;
+    background: rgba(8,10,18,0.98);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 6px;
+    z-index: 5;
+  }
+  .hero-app-tabbar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 8.5px;
+    color: var(--text-dimmer);
+    font-weight: 600;
+  }
+  .hero-app-tabbar-item.active { color: var(--brand); }
+  .hero-app-tabbar-icon {
+    font-size: 15px;
+    line-height: 1;
+  }
 
   .float-notif {
     position: absolute; top: 80px; right: -10px;
@@ -562,6 +781,11 @@
     overflow: hidden;
     padding: 30px 20px;
     position: relative;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+  }
+  .transform-sticky.fading-out {
+    opacity: 0;
   }
   .transform-label {
     position: absolute;
@@ -608,7 +832,6 @@
   }
   .transform-halo.active { opacity: 1; }
 
-  /* Browser mockup */
   .transform-browser {
     position: absolute;
     top: 50%; left: 50%;
@@ -879,7 +1102,6 @@
     color: #6b7280;
   }
 
-  /* Morphing icon */
   .transform-icon {
     position: absolute;
     top: 50%; left: 50%;
@@ -905,7 +1127,6 @@
     transform: rotate(-30deg);
   }
 
-  /* Dual phone mockup */
   .transform-phones {
     position: absolute;
     top: 50%; left: 50%;
@@ -1039,7 +1260,6 @@
     50% { transform: scale(0.86); }
   }
 
-  /* App launched view */
   .app-launch-view {
     position: absolute;
     inset: 0;
@@ -1403,15 +1623,18 @@
     .app-tab { font-size: 6px; }
     .app-tab-icon { font-size: 11px; }
     .transform-label { font-size: 11px; top: 5%; }
+    .floating-bar { top: 68px; padding: 8px 14px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .transform-browser,
-    .transform-icon,
-    .transform-phones {
-      animation: none !important;
-      transition: none !important;
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
+    .phone { animation: none; transform: rotateY(-8deg) rotateX(4deg); }
+    .reveal { opacity: 1; transform: none; }
+    .lazy-section { opacity: 1; transform: none; }
     .transform-browser { opacity: 0 !important; }
     .transform-icon { opacity: 0 !important; }
     .transform-phones { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; }
@@ -1450,7 +1673,12 @@
     background: linear-gradient(90deg, transparent, var(--brand), transparent);
     opacity: 0; transition: opacity 0.4s;
   }
-  .platform-card:hover { transform: translateY(-6px); border-color: var(--border-strong); background: var(--glass-strong); }
+  .platform-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-strong);
+    background: var(--glass-strong);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
   .platform-card:hover::before { opacity: 1; }
   .platform-icon {
     width: 52px; height: 52px; border-radius: 15px;
@@ -1478,7 +1706,11 @@
     position: relative;
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
   }
-  .step:hover { transform: translateY(-6px); border-color: var(--border-strong); }
+  .step:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-strong);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
   .step-num {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 44px; font-weight: 700; line-height: 1;
@@ -1504,7 +1736,12 @@
     opacity: 0; transition: opacity 0.4s; pointer-events: none;
   }
   .feature:hover::after { opacity: 1; }
-  .feature:hover { transform: translateY(-4px); border-color: var(--border-strong); background: var(--glass-strong); }
+  .feature:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    background: var(--glass-strong);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
   .feature-icon {
     width: 42px; height: 42px; border-radius: 12px;
     background: rgba(0,217,126,0.1); border: 1px solid rgba(0,217,126,0.18);
@@ -1520,7 +1757,11 @@
     border-radius: var(--radius-lg); padding: 36px;
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
   }
-  .publish-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+  .publish-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
   .publish-header { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
   .publish-icon {
     width: 48px; height: 48px; border-radius: 14px;
@@ -1565,6 +1806,11 @@
     margin-top: 36px;
     background: var(--glass); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 32px;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+  }
+  .troubleshoot:hover {
+    border-color: var(--border-strong);
+    animation: wobble-scale 0.5s ease-in-out;
   }
   .troubleshoot h3 {
     font-family: 'Space Grotesk', sans-serif;
@@ -1582,7 +1828,10 @@
     border-radius: var(--radius); margin-bottom: 10px;
     overflow: hidden; transition: border-color 0.3s, background 0.3s;
   }
-  .faq-item:hover { border-color: var(--border-strong); }
+  .faq-item:hover {
+    border-color: var(--border-strong);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
   .faq-item.open { background: var(--glass-strong); border-color: rgba(0,217,126,0.25); }
   .faq-q {
     width: 100%; background: transparent; color: var(--text);
@@ -1618,7 +1867,11 @@
     display: flex; flex-direction: column; position: relative;
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
   }
-  .price-card:hover { transform: translateY(-6px); border-color: var(--border-strong); }
+  .price-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-strong);
+    animation: wobble-scale 0.5s ease-in-out;
+  }
   .price-card.featured {
     background: linear-gradient(180deg, rgba(0,217,126,0.06), var(--glass));
     border-color: rgba(0,217,126,0.35);
@@ -1686,8 +1939,14 @@
     text-transform: uppercase; letter-spacing: 0.1em;
     color: var(--text-dim); margin-bottom: 16px;
   }
-  .footer-col a { display: block; color: var(--text-dim); font-size: 13.5px; padding: 6px 0; transition: color 0.2s; }
-  .footer-col a:hover { color: var(--text); }
+  .footer-col a {
+    display: block; color: var(--text-dim); font-size: 13.5px;
+    padding: 6px 0; transition: color 0.2s, transform 0.2s;
+  }
+  .footer-col a:hover {
+    color: var(--text);
+    animation: wobble 0.5s ease-in-out;
+  }
   .footer-bottom {
     display: flex; justify-content: space-between; align-items: center;
     padding-top: 28px; border-top: 1px solid var(--border);
@@ -1703,7 +1962,11 @@
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
     animation: waPulse 2.5s infinite;
   }
-  .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(37,211,102,0.6); }
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(37,211,102,0.6);
+    animation: waPulse 2.5s infinite, wobble 0.5s ease-in-out;
+  }
   @keyframes waPulse {
     0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
     50% { box-shadow: 0 8px 40px rgba(37,211,102,0.7); }
@@ -1960,6 +2223,7 @@
     border-color: var(--border-strong);
     background: var(--glass-strong);
     transform: translateY(-2px);
+    animation: wobble-scale 0.5s ease-in-out;
   }
   .radio-card:hover::before { opacity: 0.5; }
   .radio-card input { display: none; }
@@ -2103,15 +2367,15 @@
     <div class="floating-bar-info">
       <div class="floating-bar-field">
         <div class="label">Platform</div>
-        <div class="value" id="fb-platform">Android &amp; iOS</div>
+        <div class="value" id="fb-platform">Not selected</div>
       </div>
       <div class="floating-bar-field">
         <div class="label">App Name</div>
-        <div class="value" id="fb-appname">My App</div>
+        <div class="value" id="fb-appname">Not set</div>
       </div>
       <div class="floating-bar-field">
         <div class="label">Website</div>
-        <div class="value" id="fb-url">https://example.com</div>
+        <div class="value" id="fb-url">Not set</div>
       </div>
     </div>
     <div class="floating-bar-actions">
@@ -2197,26 +2461,98 @@
       <div class="phone">
         <div class="phone-screen">
           <div class="phone-notch"></div>
-          <div class="app-header">
-            <div class="app-logo">W2A</div>
-            <span>Your App</span>
-            <span>●</span>
-          </div>
-          <div class="app-body">
-            <div class="app-card">
-              <div class="app-card-title"></div>
-              <div class="app-card-line"></div>
-              <div class="app-card-line short"></div>
+
+          <!-- Real dark e-commerce app inside the hero phone -->
+          <div class="hero-app">
+            <div class="hero-app-header">
+              <div class="hero-app-brand">
+                <div class="hero-app-brand-mark">S</div>
+                ShopNaija
+              </div>
+              <div class="hero-app-cart">
+                🛒
+                <span class="hero-app-cart-badge">3</span>
+              </div>
             </div>
-            <div class="app-card">
-              <div class="app-card-title" style="width:45%"></div>
-              <div class="app-card-line"></div>
-              <div class="app-card-line shorter"></div>
+
+            <div class="hero-app-search">
+              <span class="hero-app-search-icon">🔍</span>
+              Search for products
             </div>
-            <div class="app-card">
-              <div class="app-card-title" style="width:70%"></div>
-              <div class="app-card-line"></div>
-              <div class="app-card-line short"></div>
+
+            <div class="hero-app-tabs">
+              <div class="hero-app-tab active">All</div>
+              <div class="hero-app-tab">Fashion</div>
+              <div class="hero-app-tab">Phones</div>
+              <div class="hero-app-tab">Home</div>
+            </div>
+
+            <div class="hero-app-section">
+              <h3>Popular today</h3>
+              <span>See all</span>
+            </div>
+
+            <div class="hero-app-products">
+              <div class="hero-app-product">
+                <div class="hero-app-product-img img-shoe">
+                  <span class="hero-app-product-badge">-20%</span>
+                  👟
+                </div>
+                <div class="hero-app-product-info">
+                  <div class="hero-app-product-name">Nike Air Runner</div>
+                  <div class="hero-app-product-price">₦42,500 <span class="old">₦53,000</span></div>
+                </div>
+              </div>
+
+              <div class="hero-app-product">
+                <div class="hero-app-product-img img-phone">
+                  <span class="hero-app-product-badge">NEW</span>
+                  📱
+                </div>
+                <div class="hero-app-product-info">
+                  <div class="hero-app-product-name">Samsung Galaxy A55</div>
+                  <div class="hero-app-product-price">₦385,000</div>
+                </div>
+              </div>
+
+              <div class="hero-app-product">
+                <div class="hero-app-product-img img-bag">
+                  🎒
+                </div>
+                <div class="hero-app-product-info">
+                  <div class="hero-app-product-name">Leather Backpack</div>
+                  <div class="hero-app-product-price">₦18,900</div>
+                </div>
+              </div>
+
+              <div class="hero-app-product">
+                <div class="hero-app-product-img img-watch">
+                  ⌚
+                </div>
+                <div class="hero-app-product-info">
+                  <div class="hero-app-product-name">Smart Watch Pro</div>
+                  <div class="hero-app-product-price">₦95,000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-app-tabbar">
+              <div class="hero-app-tabbar-item active">
+                <div class="hero-app-tabbar-icon">🏠</div>
+                Home
+              </div>
+              <div class="hero-app-tabbar-item">
+                <div class="hero-app-tabbar-icon">🔍</div>
+                Search
+              </div>
+              <div class="hero-app-tabbar-item">
+                <div class="hero-app-tabbar-icon">🛒</div>
+                Cart
+              </div>
+              <div class="hero-app-tabbar-item">
+                <div class="hero-app-tabbar-icon">👤</div>
+                Account
+              </div>
             </div>
           </div>
         </div>
@@ -2247,7 +2583,7 @@
 <!-- TRUST -->
 <div class="trust container">
   <p class="trust-statement">
-    <strong>Built for Nigerian businesses.</strong> Your website becomes a real app your customers can install, open, and use daily. No coding. No waiting weeks. No agency fees.
+    <strong>Built for Nigerian startups.</strong> Ship a real mobile app on top of your existing website in 24 hours. No coding. No developers to hire. No waiting weeks.
   </p>
   <div class="trust-indicators">
     <div class="trust-indicator">
@@ -2271,7 +2607,7 @@
 
 <!-- TRANSFORMATION SECTION -->
 <section class="transform-section" id="transform">
-  <div class="transform-sticky">
+  <div class="transform-sticky" id="transformSticky">
     <div class="transform-label" id="labelStart">
       <span class="label-accent">Your website</span> · FlyEmpty.ng
     </div>
@@ -2395,7 +2731,6 @@
       <div class="transform-icon" id="transformIcon">FE</div>
 
       <div class="transform-phones" id="transformPhones">
-        <!-- iPhone -->
         <div class="phone-device iphone">
           <div class="phone-screen-2">
             <div class="phone-notch-2"></div>
@@ -2566,7 +2901,6 @@
           </div>
         </div>
 
-        <!-- Android -->
         <div class="phone-device android">
           <div class="phone-screen-2">
             <div class="phone-notch-2"></div>
@@ -3006,7 +3340,7 @@
     <div class="pricing-grid">
       <div class="price-card reveal">
         <div class="price-name">Android</div>
-        <p class="price-desc">For businesses targeting the Play Store.</p>
+        <p class="price-desc">For startups targeting the Play Store.</p>
         <div class="price-amount"><span class="currency">₦</span>299,999</div>
         <ul class="price-features">
           <li><span class="check">✓</span> Android APK delivered</li>
@@ -3038,7 +3372,7 @@
 
       <div class="price-card reveal">
         <div class="price-name">iOS</div>
-        <p class="price-desc">For businesses targeting the App Store.</p>
+        <p class="price-desc">For startups targeting the App Store.</p>
         <div class="price-amount"><span class="currency">₦</span>329,999</div>
         <ul class="price-features">
           <li><span class="check">✓</span> iOS IPA delivered</li>
@@ -3317,9 +3651,14 @@
 
   function saveDraft() {
     const platform = document.querySelector('input[name="platform"]:checked')?.value || '';
-    const appName = document.getElementById('orderAppName')?.value || '';
-    const url = document.getElementById('orderUrl')?.value || document.getElementById('heroUrl')?.value || '';
+    const appNameRaw = document.getElementById('orderAppName')?.value || '';
+    const urlRaw = document.getElementById('orderUrl')?.value || document.getElementById('heroUrl')?.value || '';
+
+    const appName = appNameRaw.trim();
+    const url = urlRaw.trim();
+
     if (!platform && !appName && !url) return;
+
     const draft = { platform, appName, url, ts: Date.now() };
     try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); } catch(e) {}
     updateFloatingBar(draft);
@@ -3329,23 +3668,35 @@
     try {
       const raw = sessionStorage.getItem(DRAFT_KEY);
       if (!raw) return null;
-      return JSON.parse(raw);
+      const d = JSON.parse(raw);
+      const hasReal = (d.platform && d.platform.length > 0)
+        || (d.appName && d.appName.length > 0 && d.appName !== 'My App')
+        || (d.url && d.url.length > 0 && d.url !== 'https://example.com');
+      if (!hasReal) return null;
+      return d;
     } catch(e) { return null; }
   }
 
   function updateFloatingBar(draft) {
     if (!draft) return;
-    if (draft.platform) fbPlatform.textContent = draft.platform === 'Both' ? 'Android & iOS' : draft.platform;
-    if (draft.appName) fbAppName.textContent = draft.appName;
-    if (draft.url) fbUrl.textContent = draft.url;
+    fbPlatform.textContent = draft.platform
+      ? (draft.platform === 'Both' ? 'Android & iOS' : draft.platform)
+      : 'Not selected';
+    fbAppName.textContent = draft.appName && draft.appName.length > 0
+      ? draft.appName
+      : 'Not set';
+    fbUrl.textContent = draft.url && draft.url.length > 0
+      ? draft.url
+      : 'Not set';
   }
 
   function maybeShowBar() {
     if (dismissed) return;
     const draft = loadDraft();
-    if (!draft) return;
-    const hasContent = draft.platform || draft.appName || draft.url;
-    if (!hasContent) return;
+    if (!draft) {
+      floatingBar.classList.remove('visible');
+      return;
+    }
     if (window.scrollY > 400) {
       updateFloatingBar(draft);
       floatingBar.classList.add('visible');
@@ -3589,6 +3940,7 @@
 
   // ============ TIME-DRIVEN TRANSFORMATION ANIMATION ============
   const transformSection = document.getElementById('transform');
+  const transformSticky = document.getElementById('transformSticky');
   const transformBrowser = document.getElementById('transformBrowser');
   const transformIcon = document.getElementById('transformIcon');
   const transformPhones = document.getElementById('transformPhones');
@@ -3606,7 +3958,6 @@
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Timeline in seconds
   const TIMELINE = {
     browserHold: 0.4,
     browserMorphEnd: 1.6,
@@ -3621,11 +3972,11 @@
     total: 6.0
   };
 
-  let animState = 'idle'; // idle | playing | done
+  let animState = 'idle';
   let animStartTime = 0;
   let rafId = null;
   let launchTriggered = false;
-  let resetTimer = null;
+  let resetInProgress = false;
 
   function clamp01(v) { return Math.max(0, Math.min(1, v)); }
   function easeInOut(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
@@ -3636,16 +3987,7 @@
   }
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
-  function resetAnimation() {
-    // Cancel any running frame
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-    if (resetTimer) { clearTimeout(resetTimer); resetTimer = null; }
-
-    animState = 'idle';
-    animStartTime = 0;
-    launchTriggered = false;
-
-    // Reset visuals to initial state
+  function applyVisualReset() {
     transformBrowser.style.opacity = '1';
     transformBrowser.style.transform = 'translate(-50%, -50%) scale(1)';
     transformBrowser.style.borderRadius = '14px';
@@ -3670,6 +4012,39 @@
     labelEnd.classList.remove('active');
   }
 
+  function resetAnimation() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    animState = 'idle';
+    animStartTime = 0;
+    launchTriggered = false;
+    applyVisualReset();
+    transformSticky.classList.remove('fading-out');
+    resetInProgress = false;
+  }
+
+  function fadeOutAndReset() {
+    if (resetInProgress) return;
+    resetInProgress = true;
+
+    // Cancel animation frame
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    animState = 'idle';
+    animStartTime = 0;
+    launchTriggered = false;
+
+    // Apply fade out class, wait for transition (600ms), then reset visuals
+    transformSticky.classList.add('fading-out');
+
+    setTimeout(() => {
+      applyVisualReset();
+      // Small pause so the reset is invisible, then fade back in
+      setTimeout(() => {
+        transformSticky.classList.remove('fading-out');
+        resetInProgress = false;
+      }, 100);
+    }, 600);
+  }
+
   function triggerLaunchRing() {
     if (launchTriggered) return;
     launchTriggered = true;
@@ -3680,7 +4055,6 @@
   function applyFrame(elapsed) {
     const t = elapsed;
 
-    // Browser phase
     const browserMorphProgress = clamp01((t - TIMELINE.browserHold) / (TIMELINE.browserMorphEnd - TIMELINE.browserHold));
     const browserEase = easeInOut(browserMorphProgress);
     const browserScale = 1 - browserEase * 0.78;
@@ -3691,11 +4065,9 @@
     transformBrowser.style.borderRadius = `${browserRadius}px`;
     transformBrowser.style.opacity = browserOpacity;
 
-    // Halo
     const haloOn = t > TIMELINE.browserHold && t < TIMELINE.phonesEnd + 0.4;
     transformHalo.classList.toggle('active', haloOn);
 
-    // Icon phase
     const iconProgress = clamp01((t - TIMELINE.iconStart) / (TIMELINE.iconFlyEnd - TIMELINE.iconStart));
     const iconFadeIn = clamp01(iconProgress * 1.6);
     const iconScale = easeOutBack(iconFadeIn);
@@ -3710,14 +4082,12 @@
     transformIcon.style.opacity = iconOpacity;
     transformIcon.style.transform = `translate(calc(-50% + ${iconX}px), calc(-50% + ${iconY}px)) scale(${iconFinalScale})`;
 
-    // Phones phase
     const phonesProgress = clamp01((t - TIMELINE.phonesStart) / (TIMELINE.phonesEnd - TIMELINE.phonesStart));
     const phonesEase = easeOut(phonesProgress);
     const phoneScale = 0.85 + phonesEase * 0.15;
     transformPhones.style.opacity = phonesEase;
     transformPhones.style.transform = `translate(-50%, -50%) scale(${phoneScale})`;
 
-    // Labels
     if (t < TIMELINE.iconStart + 0.3) {
       labelStart.classList.add('active');
       labelMid.classList.remove('active');
@@ -3732,18 +4102,15 @@
       labelEnd.classList.add('active');
     }
 
-    // Launch ring
     if (t >= TIMELINE.launchRingStart && t < TIMELINE.splashStart) {
       triggerLaunchRing();
     }
 
-    // Splash on
     if (t >= TIMELINE.splashStart && t < TIMELINE.splashEnd) {
       appSplashIos.classList.add('active');
       appSplashAndroid.classList.add('active');
     }
 
-    // Splash off, app view on
     if (t >= TIMELINE.appVisible) {
       appSplashIos.classList.remove('active');
       appSplashAndroid.classList.remove('active');
@@ -3769,37 +4136,30 @@
 
   function startAnimation() {
     if (animState === 'playing' || animState === 'done') return;
+    if (resetInProgress) return;
     animState = 'playing';
     animStartTime = 0;
     rafId = requestAnimationFrame(animationLoop);
   }
 
-  // Visibility check: 40% to 100% visible triggers play, below 40% triggers reset
   function checkVisibility() {
     if (!transformSection) return;
+    if (resetInProgress) return;
+
     const rect = transformSection.getBoundingClientRect();
     const vh = window.innerHeight;
 
-    // Calculate the visible fraction of the section
     const visibleTop = Math.max(rect.top, 0);
     const visibleBottom = Math.min(rect.bottom, vh);
     const visibleHeight = Math.max(0, visibleBottom - visibleTop);
     const sectionHeight = rect.height;
     const visibleFraction = sectionHeight > 0 ? visibleHeight / sectionHeight : 0;
 
-    // Fully out of view or below 40% visible
     if (visibleFraction < 0.4) {
-      if (animState === 'playing') {
-        // User scrolled away mid-play. Reset so it replays on return.
-        resetAnimation();
-      } else if (animState === 'done') {
-        // Animation finished. Reset quietly so it replays when user returns.
-        resetAnimation();
-      } else if (animState === 'idle') {
-        // Already idle. Nothing to do.
+      if (animState === 'playing' || animState === 'done') {
+        fadeOutAndReset();
       }
     } else {
-      // Section is 40-100% visible. Start if idle.
       if (animState === 'idle') {
         startAnimation();
       }
@@ -3820,10 +4180,8 @@
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize);
 
-    // First check after layout
     setTimeout(checkVisibility, 200);
   } else if (prefersReduced && transformSection) {
-    // Reduced motion: show final state only
     transformBrowser.style.opacity = '0';
     transformIcon.style.opacity = '0';
     transformPhones.style.opacity = '1';
